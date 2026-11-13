@@ -1,0 +1,4 @@
+{$DOMAIN:161-118-169-11.sslip.io} {
+	encode zstd gzip
+	reverse_proxy s3-cdn-network:9876
+}
