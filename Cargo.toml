@@ -1,0 +1,25 @@
+[package]
+name = "s3-cdn-network"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+aws-sdk-s3 = "1.0"
+aws-config = "1.0"
+aws-credential-types = "1.0"
+dotenvy = "0.15"
+moka = { version = "0.12", features = ["future"] }
+bytes = "1.0"
+tower = { version = "0.4", features = ["limit"] }
+tower-http = { version = "0.5", features = ["cors", "compression-gzip", "trace"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter", "chrono"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "1.0"
+mongodb = { version = "2.8", features = ["tokio-runtime"] }
+bson = "2.10"
+futures = "0.3.32"
+tokio-stream = "0.1"
