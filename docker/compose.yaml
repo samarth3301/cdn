@@ -5,8 +5,8 @@ services:
     build:
       context: ..
       dockerfile: docker/Dockerfile
-    ports:
-      - "9876:9876"
+    expose:
+      - "9876"
     env_file:
       - ../.env
     restart: unless-stopped
@@ -19,6 +19,28 @@ services:
     networks:
       - cdn
 
+  caddy:
+    image: caddy:2.8-alpine
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      - DOMAIN=${DOMAIN:-161-118-169-11.sslip.io}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - s3-cdn-network
+    restart: unless-stopped
+    networks:
+      - cdn
+
 networks:
   cdn:
     driver: bridge
+
+volumes:
+  caddy_data:
+  caddy_config:
